@@ -1,0 +1,13 @@
+- name: TP1 Deploy
+  hosts: victim
+
+  roles:
+  - docker
+
+  tasks:
+  - name: Get docker-compose
+    become: yes
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.28.0/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: '+x'

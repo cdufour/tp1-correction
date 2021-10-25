@@ -1,5 +1,5 @@
 - name: TP1 Deploy
-  hosts: dev
+  hosts: victim
 
   roles:
   - docker
@@ -18,6 +18,8 @@
       repo: https://github.com/cdufour/tp1-correction.git
       dest: tp1
       force: yes
+    tags:
+      - clone-repo
 
   - name: Start app
     command:

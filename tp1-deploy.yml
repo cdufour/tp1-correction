@@ -5,9 +5,29 @@
   - docker
 
   tasks:
+
   - name: Get docker-compose
     become: yes
     get_url:
       url: https://github.com/docker/compose/releases/download/1.28.0/docker-compose-Linux-x86_64
       dest: /usr/local/bin/docker-compose
       mode: '+x'
+
+  - name: Clone repo
+    git:
+      repo: https://github.com/cdufour/tp1-correction.git
+      dest: tp1
+
+  - name: Start app
+    command:
+      cmd: docker-compose up -d
+    args:
+      chdir: tp1
+
+  - name: Permissions
+    file:
+      path: scripts/create-table.sh
+      mode: 'u+x'
+
+  - name: Create table citation
+    shell: cd tp1; /usr/bin/sh scripts/create-table.sh

@@ -1,11 +1,10 @@
 - name: TP1 Deploy
-  hosts: victim
+  hosts: dev
 
   roles:
   - docker
 
   tasks:
-
   - name: Get docker-compose
     become: yes
     get_url:
